@@ -46,7 +46,93 @@
 <p><img alt="" height="233" src="/images/4-22.png" width="500"/></p>
 <p>2.支架講解</p>
 <p>支架在跑的時候會變成弧形，為了試驗他的弧形，刻意將桿子設計成可伸縮版本。</p>
+<p><img alt="" height="234" src="/images/設計講解.png" width="500"/></p>
+<p>2.但是如果要隨時改動尺寸的話太不方便了!所以設計這一種可以隨時更動的曲線。藉由改波峰多寡和上下大小來完成各種不同的設計。</p>
+<p><img alt="" height="235" src="/images/4-22-1.png" width="500"/></p>
+<p><span>3.以下是總圖</span></p>
+<p><span><img alt="" height="236" src="/images/4-22-2.png" width="500"/></span></p>
 <p></p>
-<p></p>
-<p></p>
+<h1>TASK1</h1>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">def stu2b(account):
+    if account == "40823231":   #學號40823231變成40823231-2
+        return account + "-2"
+    elif account[0:3] == "407":  #學號407xxxxx變成s407xxxxx
+        return "s" + account
+    else:
+        return account                #其他學號按照原本學號
+ 
+teamb = []
+ 
+# open file, default is read mode, since txt content no chinese char
+# no encoding = "UTF-8" is needed
+with open("stage3_2b.txt") as fh:       #開啟檔案
+    # readlines will read into the whole line and put into list format
+    # has \n at the end of each line
+    data = fh.readlines()
+#print(len(data))
+for i in range(len(data)):
+    group = data[i].rstrip("\n").split("\t")
+    teamb.append(group)
+     
+output = ""    
+seperator = "-"*10 + "&lt;br /&gt;"       #分隔線
+ 
+for i in teamb[0:]:
+    team = i[0]                              #小組 組長 其他六個組員
+    leader = stu2b(i[1])
+    m1 = stu2b(i[3])
+    m2 = stu2b(i[5])
+    m3 = stu2b(i[7])
+    m4 = stu2b(i[9])
+    m5 = stu2b(i[11])
+    m6 = stu2b(i[13])
+     
+    try:
+        m7 = stu2b(i[15])               #第七個組員
+    except:
+        m7 = ""
+    try:
+        m8 = stu2b(i[17])               #第八個組員
+    except:
+        m8 = ""
+         
+    leaderrepo = "&lt;a href='http://github.com/" + leader + "/cd2021'&gt;" + leader + " repo&lt;/a&gt;"        #組長以及組員的倉儲和網站
+    leadersite = "&lt;a href='http://" + leader + ".github.io/cd2021'&gt;" + leader +  " site&lt;/a&gt;"
+    m1repo = "&lt;a href='http://github.com/" + m1 + "/cd2021'&gt;" + m1 + " repo&lt;/a&gt;"
+    m1site = "&lt;a href='http://" + m1 + ".github.io/cd2021'&gt;" + m1 +  " site&lt;/a&gt;"
+    m2repo = "&lt;a href='http://github.com/" + m2 + "/cd2021'&gt;" + m2 + " repo&lt;/a&gt;"
+    m2site = "&lt;a href='http://" + m2 + ".github.io/cd2021'&gt;" + m2 +  " site&lt;/a&gt;"
+    m3repo = "&lt;a href='http://github.com/" + m3 + "/cd2021'&gt;" + m3 + " repo&lt;/a&gt;"
+    m3site = "&lt;a href='http://" + m3 + ".github.io/cd2021'&gt;" + m3 +  " site&lt;/a&gt;"
+    m4repo = "&lt;a href='http://github.com/" + m4 + "/cd2021'&gt;" + m4 + " repo&lt;/a&gt;"
+    m4site = "&lt;a href='http://" + m4 + ".github.io/cd2021'&gt;" + m4 +  " site&lt;/a&gt;"
+    m5repo = "&lt;a href='http://github.com/" + m5 + "/cd2021'&gt;" + m5 + " repo&lt;/a&gt;"
+    m5site = "&lt;a href='http://" + m5 + ".github.io/cd2021'&gt;" + m5 +  " site&lt;/a&gt;"
+    m6repo = "&lt;a href='http://github.com/" + m6 + "/cd2021'&gt;" + m6 + " repo&lt;/a&gt;"
+    m6site = "&lt;a href='http://" + m6 + ".github.io/cd2021'&gt;" + m6 +  " site&lt;/a&gt;"
+  
+ 
+    teamrepo = "&lt;a href='http://github.com/" + leader + "/" + team + "'&gt;" + team + " repo&lt;/a&gt;"      #小組的倉儲含網站
+    teamsite =  "&lt;a href='http://" + m1 + ".github.io/" + team + "'&gt;" + team +  " site&lt;/a&gt;"
+ 
+    output += teamrepo + " | " + teamsite + " | " +leaderrepo + " | " + leadersite + " | " +m1repo + " | " + m1site + " | " +m2repo + " | " + m2site + " | " +m3repo + " | " + m3site + " | " +m4repo + " | " + m4site + " | " +m5repo + " | " + m5site + " | " +m6repo + " | " + m6site 
+     
+    if m7 != "":
+       m7repo = "&lt;a href='http://github.com/" + m7 + "/cd2021'&gt;" + m7 + " repo&lt;/a&gt;"                     #如果有第七個組員會再加倉儲和網站沒有的話就空白
+       m7site = "&lt;a href='http://" + m7 + ".github.io/cd2021'&gt;" + m7 +  " site&lt;/a&gt;"   
+       output += " |  " + m7repo + "| " + m7site
+    else:
+        output += "" 
+     
+    if m8 != "":
+       m8repo = "&lt;a href='http://github.com/" + m8 + "/cd2021'&gt;" + m8 + " repo&lt;/a&gt;"                     #如果有第八個組員會再加倉儲和網站沒有的話就空白最後加分隔線
+       m8site = "&lt;a href='http://" + m8 + ".github.io/cd2021'&gt;" + m8 +  " site&lt;/a&gt;"   
+       output += " |  " + m8repo + "| " + m8site 
+    else:
+        output += "" 
+ 
+ 
+print(output)
+# the following will use group data to generate needed html</pre>
+<p><br/><br/></p>
 <p></p>
