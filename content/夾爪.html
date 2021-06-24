@@ -133,10 +133,76 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">stage2-bg2 << <a href='stage2-bg2.html'>Previous</a> <a href='問題.html'>Next</a> >> 問題<br /><h1>W5</h1>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/6GqY9SyR9gw" width="500"></iframe></p>
-<p><iframe height="400" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6vipDF_G7r21etYw4fEX9krvykiulaBUsBWsZjnRi5E_O1JqMAxDKVkOIQhAu1zLGHLqO0FZQvf-E/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="500"></iframe></p>
-<br />stage2-bg2 << <a href='stage2-bg2.html'>Previous</a> <a href='問題.html'>Next</a> >> 問題</div>
+    <div id="tipue_search_content">TASK2 << <a href='TASK2.html'>Previous</a> <a href='掃地機器人.html'>Next</a> >> 掃地機器人<br /><h1>夾爪</h1>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/HYnC9NfPKBY" width="500"></iframe></p>
+<p></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">ㄑㄑimport sim as vrep
+import math
+import random
+import time
+import keyboard
+ 
+print ('Start')
+ 
+# Close eventual old connections
+vrep.simxFinish(-1)
+# Connect to V-REP remote server
+clientID = vrep.simxStart('127.0.0.1', 19997, True, True, 5000, 5)
+
+if clientID !=-1:
+    print ('Connected to remote API server')
+ 
+    res = vrep.simxAddStatusbarMessage(
+        clientID, "40823234",
+        vrep.simx_opmode_oneshot)
+        
+    if res not in (vrep.simx_return_ok, vrep.simx_return_novalue_flag):
+        print("Could not add a message to the status bar.")
+        
+    opmode = vrep.simx_opmode_oneshot_wait
+    vrep.simxStartSimulation(clientID, opmode)
+    ret,vertical_handle=vrep.simxGetObjectHandle(clientID,"VerticalJoint",opmode)#設定軸對應名稱
+    ret,spirit_handle=vrep.simxGetObjectHandle(clientID,"SpiritJoint",opmode)
+    ret,cam_handle=vrep.simxGetObjectHandle(clientID,"joint",opmode)
+    while True:
+        #keyboard "w" 前進
+     if keyboard.is_pressed("w"):
+            print("You pressed w")
+          
+            vrep.simxSetJointTargetVelocity(clientID,vertical_handle,0.1,opmode)
+     if keyboard.is_pressed("s"):#keyboard "s" 後退
+            print("You pressed s")
+          
+            vrep.simxSetJointTargetVelocity(clientID,vertical_handle,-0.1,opmode)
+     if keyboard.is_pressed("a"):#keyboard "a"向左 
+            print("You pressed a")
+          
+            vrep.simxSetJointTargetVelocity(clientID,spirit_handle,0.1,opmode)
+     if keyboard.is_pressed("d"):#keyboard "d" 向右
+            print("You pressed d")
+          
+            vrep.simxSetJointTargetVelocity(clientID,spirit_handle,-0.1,opmode)
+     if keyboard.is_pressed("q"):#keyboard "q" 前進後退停止
+            print("You pressed q")
+          
+            vrep.simxSetJointTargetVelocity(clientID,vertical_handle,0,opmode)
+     if keyboard.is_pressed("e"):#keyboard "e" 左右停止
+            print("You pressed e")
+          
+            vrep.simxSetJointTargetVelocity(clientID,spirit_handle,0,opmode) 
+     if keyboard.is_pressed("r"):#keyboard "r" 凸輪轉動
+            print("You pressed r")
+          
+            vrep.simxSetJointTargetVelocity(clientID,cam_handle,1,opmode)   
+     if keyboard.is_pressed("f"):#keyboard "f" 凸輪停止
+            print("You pressed f")
+          
+            vrep.simxSetJointTargetVelocity(clientID,cam_handle,0,opmode)        
+else:
+    print ('Failed connecting to  remote API server')
+print ('End')</pre>
+<p></p>
+<br />TASK2 << <a href='TASK2.html'>Previous</a> <a href='掃地機器人.html'>Next</a> >> 掃地機器人</div>
         
     <!-- footer -->
       <div class="container">

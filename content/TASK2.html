@@ -122,7 +122,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='About.html'>About</a><li class='has-children'><a href='stage1-bg2.html'>stage1-bg2</a><ul class='dropdown'><li><a href='圖檔.html'>圖檔</a><li><a href='w2.html'>w2</a><li><a href='w4.html'>w4</a><li><a href='問題與討論.html'>問題與討論</a></li></ul><li class='has-children'><a href='stage2-bg2.html'>stage2-bg2</a><ul class='dropdown'><li><a href='W5.html'>W5</a><li><a href='問題.html'>問題</a><li><a href='凸輪繪製.html'>凸輪繪製</a><li class='has-children'><a href='W7.html'>W7</a><ul class='dropdown'><li><a href='模擬一.html'>模擬一</a><li><a href='模擬二.html'>模擬二</a></li></ul><li class='has-children'><a href='W8.html'>W8</a><ul class='dropdown'><li><a href='模擬三.html'>模擬三</a></li></ul><li><a href='W9.html'>W9</a></li></ul><li class='has-children'><a href='stage3-bg1.html'>stage3-bg1</a><ul class='dropdown'><li><a href='TASK1.html'>TASK1</a><li><a href='TASK2.html'>TASK2</a></li></ul><li class='has-children'><a href='W15.html'>W15</a><ul class='dropdown'><li><a href='影片一.html'>影片一</a><li><a href='影片二.html'>影片二</a></li></ul><li class='has-children'><a href='W16.html'>W16</a><ul class='dropdown'><li><a href='coppelisim.html'>coppelisim</a><li><a href='onshape.html'>onshape</a></li></ul><li><a href='期末報告.html'>期末報告</a></li>
+                     <li><a href='About.html'>About</a><li class='has-children'><a href='stage1-bg2.html'>stage1-bg2</a><ul class='dropdown'><li><a href='圖檔.html'>圖檔</a><li><a href='w2.html'>w2</a><li><a href='w4.html'>w4</a><li><a href='問題與討論.html'>問題與討論</a></li></ul><li class='has-children'><a href='stage2-bg2.html'>stage2-bg2</a><ul class='dropdown'><li><a href='W5.html'>W5</a><li><a href='問題.html'>問題</a><li><a href='凸輪繪製.html'>凸輪繪製</a><li class='has-children'><a href='W7.html'>W7</a><ul class='dropdown'><li><a href='模擬一.html'>模擬一</a><li><a href='模擬二.html'>模擬二</a></li></ul><li class='has-children'><a href='W8.html'>W8</a><ul class='dropdown'><li><a href='模擬三.html'>模擬三</a></li></ul><li><a href='W9.html'>W9</a></li></ul><li class='has-children'><a href='stage3-bg1.html'>stage3-bg1</a><ul class='dropdown'><li><a href='TASK1.html'>TASK1</a><li class='has-children'><a href='TASK2.html'>TASK2</a><ul class='dropdown'><li><a href='夾爪.html'>夾爪</a><li><a href='掃地機器人.html'>掃地機器人</a></li></li></ul></ul><li class='has-children'><a href='W15.html'>W15</a><ul class='dropdown'><li><a href='影片一.html'>影片一</a><li><a href='影片二.html'>影片二</a></li></ul><li class='has-children'><a href='W16.html'>W16</a><ul class='dropdown'><li><a href='coppelisim.html'>coppelisim</a><li><a href='onshape.html'>onshape</a></li></ul><li><a href='期末報告.html'>期末報告</a></li>
                       </ul>
                 </nav>
               </div>
@@ -133,76 +133,8 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">TASK1 << <a href='TASK1.html'>Previous</a> <a href='W15.html'>Next</a> >> W15<br /><h1>TASK2</h1>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/HYnC9NfPKBY" width="500"></iframe></p>
-<p></p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">ㄑㄑimport sim as vrep
-import math
-import random
-import time
-import keyboard
- 
-print ('Start')
- 
-# Close eventual old connections
-vrep.simxFinish(-1)
-# Connect to V-REP remote server
-clientID = vrep.simxStart('127.0.0.1', 19997, True, True, 5000, 5)
-
-if clientID !=-1:
-    print ('Connected to remote API server')
- 
-    res = vrep.simxAddStatusbarMessage(
-        clientID, "40823234",
-        vrep.simx_opmode_oneshot)
-        
-    if res not in (vrep.simx_return_ok, vrep.simx_return_novalue_flag):
-        print("Could not add a message to the status bar.")
-        
-    opmode = vrep.simx_opmode_oneshot_wait
-    vrep.simxStartSimulation(clientID, opmode)
-    ret,vertical_handle=vrep.simxGetObjectHandle(clientID,"VerticalJoint",opmode)#設定軸對應名稱
-    ret,spirit_handle=vrep.simxGetObjectHandle(clientID,"SpiritJoint",opmode)
-    ret,cam_handle=vrep.simxGetObjectHandle(clientID,"joint",opmode)
-    while True:
-        #keyboard "w" 前進
-     if keyboard.is_pressed("w"):
-            print("You pressed w")
-          
-            vrep.simxSetJointTargetVelocity(clientID,vertical_handle,0.1,opmode)
-     if keyboard.is_pressed("s"):#keyboard "s" 後退
-            print("You pressed s")
-          
-            vrep.simxSetJointTargetVelocity(clientID,vertical_handle,-0.1,opmode)
-     if keyboard.is_pressed("a"):#keyboard "a"向左 
-            print("You pressed a")
-          
-            vrep.simxSetJointTargetVelocity(clientID,spirit_handle,0.1,opmode)
-     if keyboard.is_pressed("d"):#keyboard "d" 向右
-            print("You pressed d")
-          
-            vrep.simxSetJointTargetVelocity(clientID,spirit_handle,-0.1,opmode)
-     if keyboard.is_pressed("q"):#keyboard "q" 前進後退停止
-            print("You pressed q")
-          
-            vrep.simxSetJointTargetVelocity(clientID,vertical_handle,0,opmode)
-     if keyboard.is_pressed("e"):#keyboard "e" 左右停止
-            print("You pressed e")
-          
-            vrep.simxSetJointTargetVelocity(clientID,spirit_handle,0,opmode) 
-     if keyboard.is_pressed("r"):#keyboard "r" 凸輪轉動
-            print("You pressed r")
-          
-            vrep.simxSetJointTargetVelocity(clientID,cam_handle,1,opmode)   
-     if keyboard.is_pressed("f"):#keyboard "f" 凸輪停止
-            print("You pressed f")
-          
-            vrep.simxSetJointTargetVelocity(clientID,cam_handle,0,opmode)        
-else:
-    print ('Failed connecting to  remote API server')
-print ('End')</pre>
-<p></p>
-<br />TASK1 << <a href='TASK1.html'>Previous</a> <a href='W15.html'>Next</a> >> W15</div>
+    <div id="tipue_search_content">TASK1 << <a href='TASK1.html'>Previous</a> <a href='夾爪.html'>Next</a> >> 夾爪<br /><h1>TASK2</h1>
+<br />TASK1 << <a href='TASK1.html'>Previous</a> <a href='夾爪.html'>Next</a> >> 夾爪</div>
         
     <!-- footer -->
       <div class="container">
