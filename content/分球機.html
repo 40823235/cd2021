@@ -133,8 +133,51 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">影片二 << <a href='影片二.html'>Previous</a> <a href='coppelisim.html'>Next</a> >> coppelisim<br /><h1>W16</h1>
-<br />影片二 << <a href='影片二.html'>Previous</a> <a href='coppelisim.html'>Next</a> >> coppelisim</div>
+    <div id="tipue_search_content">TASK2 << <a href='TASK2.html'>Previous</a> <a href='夾爪.html'>Next</a> >> 夾爪<br /><h1>分球機</h1>
+<p><strong>測試人員:40823208 </strong>   </p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/alhCFv1ujWY" width="500"></iframe></p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">import sim as vrep
+import math
+import random
+import time
+import keyboard
+ 
+print ('Start')
+  
+# Close eventual old connections
+vrep.simxFinish(-1)
+# Connect to V-REP remote server
+clientID = vrep.simxStart('192.168.1.83', 19997, True, True, 5000, 5)
+if clientID !=-1:
+    print ('Connected to remote API server')
+  
+    res = vrep.simxAddStatusbarMessage(
+        clientID, "40823208",
+        vrep.simx_opmode_oneshot)
+         
+    if res not in (vrep.simx_return_ok, vrep.simx_return_novalue_flag):
+        print("Could not add a message to the status bar.")
+         
+    opmode = vrep.simx_opmode_oneshot_wait
+    vrep.simxStartSimulation(clientID, opmode)
+    ret, wristHandle = vrep.simxGetObjectHandle(clientID, "joint",opmode)
+while True:
+     if keyboard.is_pressed("Q"):
+            print("Velocity=5")
+            vrep.simxSetJointTargetVelocity(clientID,wristHandle,5,opmode)
+            #Q可以讓轉速=5
+     if keyboard.is_pressed("W"):
+            print("Velocity=10")
+            vrep.simxSetJointTargetVelocity(clientID,wristHandle,10,opmode)
+            #W可以讓轉速=10
+     if keyboard.is_pressed("E"):
+            print("Velocity=0")
+            vrep.simxSetJointTargetVelocity(clientID,wristHandle,0,opmode)       
+            #E可以讓轉速=0
+else:
+    print ('Failed connecting to  remote API server')
+print ('End')</pre>
+<p></p><br />TASK2 << <a href='TASK2.html'>Previous</a> <a href='夾爪.html'>Next</a> >> 夾爪</div>
         
     <!-- footer -->
       <div class="container">
